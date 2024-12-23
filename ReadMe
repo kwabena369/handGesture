@@ -1,0 +1,33 @@
+# Hand Gesture Recognition
+
+This project is focused on recognizing hand gestures using computer vision techniques. The main code for this project is contained in the `index.py` file.
+
+## About
+
+The `index.py` script captures video from a webcam, processes the frames to detect and recognize hand gestures, and displays the results in real-time. The project utilizes libraries such as OpenCV and TensorFlow for image processing and machine learning.
+
+## Requirements
+
+- Python 3.x
+- OpenCV
+- TensorFlow
+- NumPy
+
+## Installation
+
+1. Clone the repository:
+    ```
+    git clone https://github.com/yourusername/handGesture.git
+    ```
+2. Navigate to the project directory:
+    ```
+    cd handGesture
+    ```
+3. Install the required packages:
+    ```
+    pip install -r requirements.txt
+    ```
+
+## Usage
+
+Run the `index.py` script to start the hand gesture recognition:

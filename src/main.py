@@ -4,6 +4,8 @@ import numpy as np
 from utils.time import Timer
 from enemy import Enemy
 from life_system import LifeSystem
+from score import Score
+
 
 #  the initial dimension of the window
 screen_width = 640
@@ -13,6 +15,7 @@ screen_height = 480
 enemy = Enemy(screen_width, screen_height)
 timer = Timer(10)  #  that 10 sec and the ball would change it possiiton 
 life_system = LifeSystem()
+score = Score()
 
 # the mediapipe for the hand dectionand drawing the landmark
 mp_hands = mp.solutions.hands
@@ -50,6 +53,7 @@ with mp_hands.Hands(min_detection_confidence=0.5, min_tracking_confidence=0.5) a
                 if enemy.is_finger_in_circle(second_finger_tip_x, second_finger_tip_y):
                     enemy.reset_position()
                     timer.start()  # Restart the timer when the circle is touched
+                    score.increase()  # Increase the score when the circle is touched
 
                 mp_drawing.draw_landmarks(frame, hand_landmarks, mp_hands.HAND_CONNECTIONS)
         else:
@@ -67,6 +71,7 @@ with mp_hands.Hands(min_detection_confidence=0.5, min_tracking_confidence=0.5) a
         enemy.draw(frame, color_value)
         cv.putText(frame, f'Time: {timer.get_remaining_time():.1f}s', (10, 30), cv.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv.LINE_AA)
         cv.putText(frame, f'Lives: {life_system.lives}', (10, 60), cv.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv.LINE_AA)
+        score.display(frame)  # Display the score
         cv.imshow("Hand Tracking", frame)
         if cv.waitKey(1) & 0xFF == ord("q"):
             break
